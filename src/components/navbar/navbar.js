@@ -10,9 +10,9 @@ const RecentsRoute = () => <Text>Recents</Text>;
 const NavBar = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "chats", title: "Chats", icon: "chat" },
-    { key: "post", title: "Post", icon: "plus-box" },
-    { key: "recents", title: "Recents", icon: "history" },
+    { key: "chats", title: "Chats", icon: "chat", color: "#09CEAA" },
+    { key: "post", title: "Post", icon: "plus-box", color: "#2ED2B6" },
+    { key: "recents", title: "Recents", icon: "history", color: "#09CEAA" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -26,6 +26,7 @@ const NavBar = () => {
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
+      shifting={true}
     />
   );
 };

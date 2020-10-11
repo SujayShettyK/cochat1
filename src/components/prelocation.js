@@ -7,7 +7,7 @@ function PreLocation() {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#70ffa2",
+        backgroundColor: "#09CEAA",
       }}
     >
       <Text>We require your current location to give you local content</Text>

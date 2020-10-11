@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import {
+  Avatar,
+  Button,
+  Card,
+  Title,
+  Paragraph,
+  DefaultTheme,
+  Provider as PaperProvider,
+} from "react-native-paper";
+
 import { View } from "react-native";
 import NavBar from "./src/components/navbar/navbar";
 import PreLocation from "./src/components/prelocation";
@@ -11,6 +20,15 @@ import "firebase/firestore";
 import impfirebase from "./src/components/firebase";
 const db = firebase.firestore();
 const Stack = createStackNavigator();
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#09CEAA",
+    accent: "#2ed2b6",
+  },
+};
 
 function MyApp() {
   const [permissionacc, setPermissionacc] = useState(false);
@@ -54,28 +72,30 @@ function MyApp() {
     LocPerm();
   }, []);
   return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: 25,
-      }}
-    >
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          {permissionacc == true ? (
-            <>
-              <Stack.Screen name="Navbar" component={NavBar} />
-            </>
-          ) : (
-            <Stack.Screen name="Prelocation" component={PreLocation} />
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </View>
+    <PaperProvider theme={theme}>
+      <View
+        style={{
+          flex: 1,
+          marginTop: 25,
+        }}
+      >
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            {permissionacc == true ? (
+              <>
+                <Stack.Screen name="Navbar" component={NavBar} />
+              </>
+            ) : (
+              <Stack.Screen name="Prelocation" component={PreLocation} />
+            )}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </View>
+    </PaperProvider>
   );
 }
 
