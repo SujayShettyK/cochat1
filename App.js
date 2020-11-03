@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  Avatar,
-  Button,
-  Card,
-  Title,
-  Paragraph,
   DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
-
 import { View } from "react-native";
 import NavBar from "./src/components/navbar/navbar";
 import PreLocation from "./src/components/prelocation";
@@ -16,9 +10,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as Location from "expo-location";
 import * as firebase from "firebase";
-import "firebase/firestore";
 import impfirebase from "./src/components/firebase";
-const db = firebase.firestore();
+
 const Stack = createStackNavigator();
 const theme = {
   ...DefaultTheme,
@@ -56,14 +49,16 @@ function MyApp() {
         firebase.auth().onAuthStateChanged(function (user) {
           if (user) {
             uid = user.uid;
-            db.collection("users")
-              .doc(uid)
+            firebase
+            .database()
+            .ref("users/" + uid)
               .set({
                 userid: uid,
                 coords: {
                   latitude: location.coords.latitude,
                   longitude: location.coords.longitude,
                 },
+                karma: 0,
               });
           }
         });

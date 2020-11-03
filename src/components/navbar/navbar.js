@@ -5,20 +5,20 @@ import Post from "../post/post";
 
 const PostRoute = () => <Post />;
 
-const RecentsRoute = () => <Text>Recents</Text>;
-
+const MeRoute = () => <Text>Me</Text>;
+ 
 const NavBar = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "chats", title: "Chats", icon: "chat", color: "#09CEAA" },
+    { key: "chats", title: "Chats", icon: "chat", color: "#2ED2B6" },
     { key: "post", title: "Post", icon: "plus-box", color: "#2ED2B6" },
-    { key: "recents", title: "Recents", icon: "history", color: "#09CEAA" },
+    { key: "me", title: "Me", icon: "account", color: "#2ED2B6" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
     chats: Chats,
     post: PostRoute,
-    recents: RecentsRoute,
+    me: MeRoute,
   });
 
   return (
